@@ -36,13 +36,41 @@ public class SakkTabla
             number.Height = 27;
             number.Margin = new Thickness(bottomLeftX - 20, y + 20, 0, 0);
             grid.Children.Add(number);
-          
+            for (int col = 1; col <= 8; col++)
+            {
+                int x = bottomLeftX + (col - 1) * 60;
+                if (row == 1)
+                {
+                    // oszlop betű
+                    var letter = new Label();
+                    letter.Content = "" + (char)('A' + (col - 1));
+                    letter.HorizontalAlignment = HorizontalAlignment.Left;
+                    letter.VerticalAlignment = VerticalAlignment.Top;
+                    letter.Width = 60;
+                    letter.Height = 27;
+                    letter.Margin = new Thickness(x + 20, y + 60, 0, 0);
+                    grid.Children.Add(letter);
+                }
+                var tile = new Rectangle();
+
+            }
 
         }
+        TablaReset();
        
     }
 
-
-
-   
+    private void TablaReset()
+    {
+        bool dark = true;
+        for (int row = 1; row <= 8; row++)
+        {
+            for (int col = 1; col <= 8; col++)
+            {
+                tiles[row][col].Fill = dark ? DARK : LIGHT;
+                dark = !dark;
+            }
+            dark = !dark;
+        }
+    }
 }
